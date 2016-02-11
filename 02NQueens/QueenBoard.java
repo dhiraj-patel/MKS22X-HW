@@ -1,7 +1,7 @@
-public class Board{
+public class QueenBoard{
     int[][]board;
     private int size;
-    public Board(int n){
+    public QueenBoard(int n){
 	board = new int[n][n];
 	for(int r = 0;r < board.length;r++){
 	    for(int c = 0;c<board[r].length;c++){
@@ -30,9 +30,7 @@ public class Board{
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
-	if(col == 0){
-	    printSolution();
-	}
+
 	if(col == size){
 	    printSolution();
 	    return true;
@@ -52,12 +50,10 @@ public class Board{
 		
 	
 
-    
-    
     public void printSolution(){
 	String unFilteredSolution = "";
-	for(int r = 0;r < board.length;r++){
-	    for(int c=0;c<board[r].length;c++){
+	for(int r = 0;r < size;r++){
+	    for(int c=0;c<size;c++){
 		if(board[r][c]<= 0){
 		    unFilteredSolution+="- ";
 		}
@@ -65,11 +61,11 @@ public class Board{
 		    unFilteredSolution+="Q ";
 		}
 	    }
+	    unFilteredSolution+="\n";
 	}
 	System.out.println(unFilteredSolution);
     }
-    
-    
+
 
 
 
@@ -171,7 +167,7 @@ public class Board{
 
 
     public static void main(String[]args){
-	Board b = new Board(7);
+	QueenBoard b = new QueenBoard(10);
 	System.out.println(b.solve());
     }
     

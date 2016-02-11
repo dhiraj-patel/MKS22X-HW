@@ -1,5 +1,6 @@
 public class Board{
     int[][]board;
+    private int size;
     public Board(int n){
 	board = new int[n][n];
 	for(int r = 0;r < board.length;r++){
@@ -7,6 +8,7 @@ public class Board{
 		board[r][c] = 0;
 	    }
 	}
+	size = n;
 	// initiallize them all to zeroes
     }
 
@@ -21,28 +23,50 @@ public class Board{
      */
     public boolean solve()
     {
-	return false;
+	return solveH(0);
     }
 
     /**
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
+	if(col == 0){
+	    printSolution();
+	}
+	if(col == size){
+	    printSolution();
+	    return true;
+	}
+	for(int count = 0;count<size;count++){
+	    if(addQueen(count,col)){
+		if(solveH(1+col)){
+			return true;
+		}else{
+		    removeQueen(count,col);
+		}
+	    }
+	}
 	return false;
+	
     }
+		
+	
+
+    
     
     public void printSolution(){
-	String unFilteredSolution = board.toString();
-	for(int i = 0; i<unFilteredSolution.length();i++){
-	    if(Integer.parseInt(i) <= 0){
-		i = '-';
-	    }
-	    else{
-		i = 'Q';
+	String unFilteredSolution = "";
+	for(int r = 0;r < board.length;r++){
+	    for(int c=0;c<board[r].length;c++){
+		if(board[r][c]<= 0){
+		    unFilteredSolution+="- ";
+		}
+		else{
+		    unFilteredSolution+="Q ";
+		}
 	    }
 	}
 	System.out.println(unFilteredSolution);
-	
     }
     
     
@@ -145,16 +169,12 @@ public class Board{
 	return ans; 
     }
 
-    public static void main(String[]args){
-	Board b = new Board(5);
-        System.out.println(b);
-	b.addQueen(3,0);
-	b.addQueen(0,1);
-        System.out.println(b);
-	b.removeQueen(3,0);
-        System.out.println(b);
-    }
 
+    public static void main(String[]args){
+	Board b = new Board(7);
+	System.out.println(b.solve());
+    }
+    
 }
 
 

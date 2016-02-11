@@ -32,18 +32,17 @@ public class Board{
     }
     
     public void printSolution(){
-	String unFilteredSolution = "";
-	for(int r = 0;r < board.length;r++){
-	    for(int c=0;c<board[r].length;c++){
-		if(board[r][c]<= 0){
-		    unFilteredSolution+="- ";
-		}
-		else{
-		    ans+="Q ";
-		}
+	String unFilteredSolution = board.toString();
+	for(int i = 0; i<unFilteredSolution.length();i++){
+	    if(Integer.parseInt(i) <= 0){
+		i = '-';
+	    }
+	    else{
+		i = 'Q';
 	    }
 	}
 	System.out.println(unFilteredSolution);
+	
     }
     
     

@@ -57,23 +57,18 @@ public class KnightBoard{
 	
 	return false;
     }
-    
-
-
     public boolean solveH(int row,int col, int step){
-	boolean works = false;
-	// checks the borders
+
 	if(row<2||row>= board.length-2||col<2||col>=board[0].length-2){
 	    return false;
 	}
-	// checks the step border move
 	if(step == ((board.length-4) * (board[0].length -4)+1)){
-	    return true;
+		return true;
 	}
-	// past the basecases
 	else{
+	    boolean solved = false;
 	    if(addKnight(row,col,step)){
-		works = false ||
+		solved = solved ||
 		    solveH(row + 1,col+2,step+1) ||
 		    solveH(row + 1,col-2,step+1) ||
 		    solveH(row + 2,col+1,step+1) ||
@@ -82,7 +77,7 @@ public class KnightBoard{
 		    solveH(row - 2,col-1,step+1) ||
 		    solveH(row - 1,col+2,step+1) ||
 		    solveH(row - 1,col+2,step+1);
-		if(works){
+		if(solved){
 		    return true;
 		}else{
 		    removeKnight(row,col,step);
@@ -93,26 +88,23 @@ public class KnightBoard{
 	}
 	return false;
     }
-
-	
-    
     public void printSolution(){
-    String ans = "";	
-    for(int r=2;r <board.length-2;r++){
-	for(int c = 2;c<board[r].length-2;c++){
-	    if(board[r][c] == 0){
-		ans+=" _ ";
-	    }
-	    else{
-		ans += " " + board[r][c] + " ";
+	String ans = "";	
+	for(int r=2;r <board.length-2;r++){
+	    for(int c = 2;c<board[r].length-2;c++){
+		if(board[r][c] == 0){
+		    ans+=" _ ";
 		}
+		else{
+		    ans += " " + board[r][c] + " ";
+		}
+	    }
+	    ans+="\n";
 	}
-	ans+="\n";
-    }
-    System.out.println(ans);
+	System.out.println(ans);
     }
     public static void main(String[]args){
-	KnightBoard kb = new KnightBoard(5);
+	KnightBoard kb = new KnightBoard(5,6);
 	kb.solve();
 	kb.printSolution();
     }

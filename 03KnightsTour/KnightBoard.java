@@ -112,7 +112,7 @@ public class KnightBoard{
     System.out.println(ans);
     }
     public static void main(String[]args){
-	KnightBoard kb = new KnightBoard(5);
+	KnightBoard kb = new KnightBoard(5,6);
 	kb.solve();
 	kb.printSolution();
     }

@@ -59,13 +59,32 @@ public class KnightBoard{
     public boolean solve(){
 	return solveH(2,2,1);
     }
-
+    /*
+    public void printSolution(){
+	String retStr = "Board:";
+	for(int row = 0;row<board.length;row++){
+	    retStr += "\n";
+	    for(int col = 0;col<board[row].length;col++){
+		retStr += " ";
+		if((board[row][col]<10)&&(board.length*board[0].length>10)){
+		    retStr+="_";
+		}
+		retStr+=board[row][col];
+	    }
+	}
+	System.out.println(retStr);
+    }
+    */
+    // mine
     public void printSolution(){
     String ans = "";	
     for(int r=2;r <board.length-2;r++){
 	for(int c = 2;c<board[r].length-2;c++){
 	    if(board[r][c] == 0){
 		ans+=" _ ";
+	    }
+	    if(board[r][c]<10){
+		ans+= " 0"+board[r][c]+" ";
 	    }
 	    else{
 		ans += " " + board[r][c] + " ";

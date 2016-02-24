@@ -1,0 +1,26 @@
+ptep+1)||
+    solvee(i+1,j-2,step+1)||
+	solvee(i-1,j+2,step+1)||
+	solvee(i+2,j-1,step+1)||
+	solvee(i-2,j+1,step+1);
+}
+
+public boolean solve(){
+    return solvee(2,2,1);
+}
+
+public void printSolution(){
+    String s="";
+    for(int i=2;i<board.length-2;i++){
+	for(int j=2;j<board[0].length-2;j++){
+	    if(board[i][j]<10){
+		s+="0";
+	    }
+	    s+=board[i][j]+" ";
+	}
+	s+="\n";
+    }
+    System.out.println(s);
+}
+
+

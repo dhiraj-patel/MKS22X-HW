@@ -1,61 +1,52 @@
-public class Sorts {
-    private int[] array;
-    private int[] tempMergArr;
-    private int length;
-
-    
-    
-    public static void main(String[]args){
-	int[] arrayToSort = {3, 4, 6, 2, 4, 8, 4,12,34,12,123, 6, 5, 3};
-	arrayToSort = sort(arrayToSort);
-	String ans = "";
-	for (int i = 0; i < arrayToSort.length-1; i++) {
-	    ans+=(" " + arrayToSort[i] + ", ");
+import java.util.*;
+public class Sorts{
+    public static void main(String[] args) {
+        int[] list = {5,123,5,3,2,-1,23,12,-1000,-59,-29};
+	if(list.length<1){
+	    System.out.println("No elements in list!");
+	}else{
+	    mergeSort(list);
+	    System.out.println("Abra-Cadabra: New Sorted Array:  " + Arrays.toString(list));
 	}
-	System.out.println(ans.substring(0,ans.length()-2));
     }
-     
-    public static int[] sort(int[]inputArr) {
-	int[] array = inputArr;
-        int length = inputArr.length;
-        int[] tempMergArr = new int[length];
-        mergeSort(array, length, tempMergArr, 0, length - 1);
-	return array;
-    }
-    
-    
-    private static int[] mergeSort(int[] array, int length, int[] tempMergArr, int lowerIndex, int higherIndex) {
-        if (lowerIndex < higherIndex) {
-            int middle = lowerIndex + (higherIndex - lowerIndex) / 2; // finds the splitting point
-            mergeSort(array, length, tempMergArr, lowerIndex, middle);// merge of the first half
-            mergeSort(array, length, tempMergArr, middle + 1, higherIndex); // merge the second half
-            mergeParts(array, length, tempMergArr, lowerIndex, middle, higherIndex);
+    public static void mergeSort(int[] array) {
+        if (array.length > 1) {
+	    int[] left = lefty(array);
+            int[] right = righty(array);
+	    mergeSort(left);
+            mergeSort(right);
+	    merge(array, left, right);
         }
-	return array;
     }
- 
-    private static int[] mergeParts(int[] array, int length, int[] tempMergArr, int lowerIndex, int middle, int higherIndex) {
-        for (int i = lowerIndex; i <= higherIndex; i++) {
-            tempMergArr[i] = array[i];
+    public static int[] righty(int[] array) {
+        int size1 = array.length / 2;
+        int size2 = array.length - size1;
+        int[] right = new int[size2];
+        for (int i = 0; i < size2; i++) {
+            right[i] = array[i + size1];
         }
-        int i = lowerIndex;
-        int j = middle + 1;
-        int k = lowerIndex;
-        while (i <= middle && j <= higherIndex) {
-            if (tempMergArr[i] <= tempMergArr[j]) {
-                array[k] = tempMergArr[i];
-                i++;
+        return right;
+    }
+    public static int[] lefty(int[] array) {
+        int size1 = array.length / 2;
+        int[] left = new int[size1];
+        for (int i = 0; i < size1; i++) {
+            left[i] = array[i];
+        }
+        return left;
+    }
+
+    public static void merge(int[] result,int[] left, int[] right) {
+        int r = 0;  
+        int c = 0;  
+	for (int i = 0; i < result.length; i++) {
+            if (c >= right.length || (r < left.length &&left[r] <= right[c])) {
+                result[i] = left[r];    
+                r++;
             } else {
-                array[k] = tempMergArr[j];
-                j++;
+                result[i] = right[c];   
+                c++;
             }
-            k++;
         }
-        while (i <= middle) {
-            array[k] = tempMergArr[i];
-            k++;
-            i++;
-        }
-	return array;
     }
 }

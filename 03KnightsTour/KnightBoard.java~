@@ -54,7 +54,7 @@ public class KnightBoard{
 	    solveH(r-1,c-2,step+1)||
 	    solveH(r-2,c-1,step+1)||
 	    solveH(r+1,c-2,step+1);
-    }
+	    }
     
     public boolean solve(){
 	return solveH(2,2,1);

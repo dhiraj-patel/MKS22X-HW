@@ -1,5 +1,8 @@
 import java.util.*;
 public class Sorts{
+    public static String name(){
+	return "7,Patel,Dhiraj";
+    }
     public static void main(String[] args) {
         int[] list = {5,123,5,3,2,-1,23,12,-1000,-59,-29};
 	if(list.length<1){

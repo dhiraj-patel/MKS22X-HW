@@ -1,26 +1,33 @@
-import java.util.*;
 public class Sorts{
     public static String name(){
 	return "7,Patel,Dhiraj";
     }
-    public static void main(String[] args) {
-        int[] list = {5,123,5,3,2,-1,23,12,-1000,-59,-29};
+    public static  void main(String[] args) {
+        int[] list = {5,123,5,3,2,-1,0,23,12,-1000,-59,-29};
 	if(list.length<1){
 	    System.out.println("No elements in list!");
 	}else{
-	    mergeSort(list);
-	    System.out.println("Abra-Cadabra: New Sorted Array:  " + Arrays.toString(list));
+	    mergesort(list);
+	    System.out.println("Abra-Cadabra: New Sorted Array:  " + printArray(list));
 	}
     }
-    public static void mergeSort(int[] array) {
+    public static void mergesort(int[] array) {
         if (array.length > 1) {
 	    int[] left = lefty(array);
             int[] right = righty(array);
-	    mergeSort(left);
-            mergeSort(right);
+	    mergesort(left);
+            mergesort(right);
 	    merge(array, left, right);
         }
     }
+    public static String printArray(int[]array){
+	String ans ="";
+	for(int i = 0 ; i<array.length;i++){
+	    ans+=array[i]+" ";
+	}
+	return ans;
+    }
+
     public static int[] righty(int[] array) {
         int size1 = array.length / 2;
         int size2 = array.length - size1;

@@ -1,15 +1,32 @@
+import java.util.*;
 public class Sorts{
     public static String name(){
 	return "7,Patel,Dhiraj";
     }
     public static  void main(String[] args) {
         int[] list = {5,123,5,3,2,-1,0,23,12,-1000,-59,-29};
+	
+	int[] d = new int [4000000];
+	int[] c = new int [d.length];
+
+	for(int i = 0; i < d.length; i++){
+	    d[i]= (int)(Math.random()*Integer.MAX_VALUE);
+	    c[i]= d[i];
+	}
+	
+	mergesort(d); //or even your old quicksort!!!
+	Arrays.sort(c);
+	System.out.println("Done: Sorted="+Arrays.equals(d,c));
+	
+	/*
+
+
 	if(list.length<1){
 	    System.out.println("No elements in list!");
 	}else{
 	    mergesort(list);
 	    System.out.println("Abra-Cadabra: New Sorted Array:  " + printArray(list));
-	}
+	    }*/
     }
     public static void mergesort(int[] array) {
         if (array.length > 1) {

@@ -53,42 +53,31 @@ public class Quick{
 	ans += data[data.length-1]+" }";
 	System.out.println(ans);
     }
-    public static int partition(int data[], int left, int right){
-	int i = left;
-	int j = right;
-	int temp;
-	int pivot = data[(left + right) / 2];
-     	while (i <= j) {
-            while (data[i] < pivot)
-		i++;
-            while (data[j] > pivot)
-		j--;
-            if (i <= j) {
-		temp = data[i];
-		data[i] = data[j];
-		data[j] = temp;
-		i++;
-		j--;
-            }
-	};
-     
-	return i;
-    }
- 
-    public static void quickSort(int data[], int left, int right) {
-	int index = partition(data, left, right);
-	if (left < index - 1)
-            quickSort(data, left, index - 1);
-	if (index < right)
-            quickSort(data, index, right);
-    }
+
 
     public static void main(String[]args){
-	int[] b=new int[4000000];
-	for(int i=0;i<b.length;i++){
-	    b[i]=(int)(Math.pow(-1,(int)(Math.random()*2)))*Integer.MAX_VALUE;
-	}
-	quickSort(b,0,b.length-1);
+
 	
+	int[]array = {-96, -91, -88, -87, -81, -74, -69, -63, -60, -56, -48, -46, -44, -41, -38, -29, -28, -25, -24, -21, -20, -13, -9, -8, -7, -4, 6, 11, 13, 17, 20, 26, 29, 30, 33, 39, 49, 55, 56, 65, 66, 67, 70, 78, 84, 85, 86, 88, 89, 91};
+	System.out.println("BEGAN testing with old quick stuff");
+
+	System.out.println(quickselectOld(array,0));
+	
+
+	System.out.println("HERE IS THE RESULTS FOR THE QUICKSORT");
+	int[] d = new int [4000000];
+	int[] c = new int [d.length];
+
+	for(int i = 0; i < d.length; i++){
+	    d[i]= (int)(Math.random()*Integer.MAX_VALUE);
+	    c[i]= d[i];
+	}
+	quickSort(d,0,d.length-1); //or even your old quicksort!!!
+	Arrays.sort(c);
+	System.out.println("Done: Sorted="+Arrays.equals(d,c));
+	System.out.println("FINISHED testing with old quick stuff");
+
+	
+
     }
 }

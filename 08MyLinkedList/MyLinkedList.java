@@ -6,16 +6,21 @@ public class MyLinkedList {
 	private int value;
 	private LNode next;
 	
-	private LNode(int n){
-	    setValue(n);
+	private LNode(int val,int n){
+	    setValue(val);
+	    setNext(n);
 	}
-	private getNext(){
+	private int getNext(){
+	    return next;
 	}
-	private getValue(){
+	private int getValue(){
+	    return value;
 	}
-	private setNext(){
+	private void setNext(int i){
+	    next = i;
 	}
-	private setValue(){
+	private void setValue(int i){
+	    value = i;
 	}
 
     }
@@ -50,7 +55,10 @@ public class MyLinkedList {
 	    return end;
 	}	
     }
-    
+    public MyLinkedList(){
+	start = new LNode(0,null);
+	size = 0;
+    }
 
 }
 

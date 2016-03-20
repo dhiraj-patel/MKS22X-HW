@@ -1,41 +1,45 @@
 public class MyLinkedList {
     private LNode start;
     private int size;
-
+    private LNode end;
     private class LNode{
 	private int value;
 	private LNode next;
-	
-	private LNode(int val,int n){
+	public LNode(int n){
+	    this(n,null);
+	}
+	private LNode(int val,LNode n){
 	    setValue(val);
 	    setNext(n);
 	}
-	private int getNext(){
+	private LNode getNext(){
 	    return next;
 	}
 	private int getValue(){
 	    return value;
 	}
-	private void setNext(int i){
+	private void setNext(LNode i){
 	    next = i;
 	}
 	private void setValue(int i){
 	    value = i;
 	}
-
     }
+    public int size(){
+	return size;
+    }
+    
     public boolean add(int value){
 	if(start == null){
-	    start = new LNode(value);
+	    start = new LNode(value,null);
+	    end = start;
 	    size++;
 	    return true;
-	}else{
-	    LNode temp = start;
-	    while(temp.getNext()!=null){
-		temp = temp.getNext();
-	    }
-	    temp.setNext(new LNode(value));
-	    size++;
+	}
+	else{
+	    LNode test = new LNode(value);
+	    end.setNext(test);
+	    end=end.getNext();
 	    return true;
 	}
     }
@@ -54,11 +58,87 @@ public class MyLinkedList {
 	    end += "]";
 	    return end;
 	}	
-    }
+    }/*
     public MyLinkedList(){
 	start = new LNode(0,null);
 	size = 0;
+	}*/
+    public int get(int index){
+       	LNode temp = start;
+	int i =0 ;
+	while(i<index){
+	    temp =temp.getNext();
+	    i++;
+	}
+	return temp.getValue();
     }
-
+    public int set(int index,int value){
+	LNode l = start;
+	int i = 0;
+	while(i<index){
+	    l = l.getNext();
+	    i++;
+	}
+	int temp = l.getValue();
+	l.setValue(value);
+	return temp;
+    }
+    public int indexOf(int value){
+	LNode temp = start;
+	int i = 0;
+	while(i<size){
+	    if(temp.getValue()==value){
+		return i;
+	    }
+	    else{
+		temp=temp.getNext();
+	    }
+	    i++;
+	}
+	return -1;
+    }
+    public boolean clear(){
+	start = null;
+	size=0;
+	return true;
+    }
+    public int remove(int index){
+	int old = get(index);
+	if(index>size){
+	    throw(new IndexOutOfBoundsException("out of bounds"));
+	}
+	else if(index == 0){
+	    start=start.getNext();
+	    
+	}
+	else{
+	    LNode temp = start;
+	    for(int i =0 ; i<index-1;i++){
+		temp=temp.getNext();
+	    }
+	    temp.setNext(temp.getNext().getNext());
+	    size--;
+	}
+	return old;
+    }
+    public boolean add(int index,int value){
+	if(index>size||index<0){
+	    throw(new IndexOutOfBoundsException("out of bounds"));
+	}
+	if(index == 0){
+	    LNode current = new LNode(value,start);
+	    start = current;
+	    size++;
+	    return true;
+	}
+	LNode temp = start;
+	for(int i = 0;i<index-1;i++){
+	    temp=temp.getNext();
+	}
+	LNode temp2 = new LNode(value,temp.getNext());
+	temp.setNext(temp2);
+	size++;
+	return true;
+    }
+	
 }
-

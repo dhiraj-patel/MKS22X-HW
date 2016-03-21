@@ -2,28 +2,19 @@ public class MyLinkedList {
     private LNode start;
     private int size;
     private LNode end;
-    private class LNode{
-	private int value;
+    private class LNode<T>{
+	private T thing;
 	private LNode next;
-	public LNode(int n){
-	    this(n,null);
+	public LNode(T object, LNode nextL){
+	    thing = object;
+	    next = nextL;
 	}
-	private LNode(int val,LNode n){
-	    setValue(val);
-	    setNext(n);
+	public LNode(){};
+	public LNode(T object) {
+	    thing = object;
 	}
-	private LNode getNext(){
-	    return next;
-	}
-	private int getValue(){
-	    return value;
-	}
-	private void setNext(LNode i){
-	    next = i;
-	}
-	private void setValue(int i){
-	    value = i;
-	}
+	// need the get and set stuff
+
     }
     public int size(){
 	return size;

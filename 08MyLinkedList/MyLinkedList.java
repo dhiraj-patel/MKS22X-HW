@@ -1,135 +1,153 @@
-public class MyLinkedList {
-    private LNode start;
+public class MyLinkedList<T>{
+    private LNode start, end;
     private int size;
-    private LNode end;
-    private class LNode<T>{
-	private T thing;
-	private LNode next;
-	public LNode(T object, LNode nextL){
-	    thing = object;
-	    next = nextL;
-	}
-	public LNode(){};
-	public LNode(T object) {
-	    thing = object;
-	}
-	// need the get and set stuff
-
+    public String name(){
+	return "Patel,Dhiraj";
+    }
+    public MyLinkedList(){
+	start = null;
+	size=0;
+	end = start;
+    }
+    public MyLinkedList(LNode _start){
+	start=_start;
+	end=start;
+	size=1;
     }
     public int size(){
 	return size;
     }
-    
-    public boolean add(int value){
-	if(start == null){
-	    start = new LNode(value,null);
-	    end = start;
-	    size++;
-	    return true;
+    public String toString() {
+	LNode current = start;
+	if(current == null) {
+	    return "[ ]" ;
 	}
-	else{
-	    LNode test = new LNode(value);
-	    end.setNext(test);
-	    end=end.getNext();
-	    return true;
+	String ans = "[";
+	while(current.getNext()!=null){ 
+	    ans += current.getValue() + ", ";
+	    current = current.getNext();
 	}
+	ans+=current.getValue() + "]";
+	return ans;
     }
-    public String toString(){
-	if(start == null){
-	    return "[]";
+    public T get(int index){
+	if(index<0||index>=size){
+	    throw new IndexOutOfBoundsException();
 	}
-	else{
-	    String end = "[";
-	    LNode temp = start;
-	    while(temp!=null){
-		end += temp.getValue()+",";
-		temp=temp.getNext();
+	LNode test = start;
+	for(int i = 0;i<index;i++){
+	    test=test.getNext();
+	}
+	return test.getValue();
+    }
+    public T set(int index,T _value){
+	T oldval = get(index);
+	if(index<0||index>=size){
+	    throw new IndexOutOfBoundsException();
+	}
+	LNode test = start;
+	for(int i = 0;i<index;i++){
+	    test=test.getNext();
+	}
+	test.setValue(_value);
+	return oldval;
+    }
+    public T remove(int index){
+	if(index<0||index>=size){
+	    throw new IndexOutOfBoundsException();
+	}
+	if(index==0){
+	    T ans = start.getValue();
+	    start=start.getNext();
+	    return ans;
+	}
+	else{   
+	    size--;
+	    T ans = get(index);
+	    LNode current = start;
+	    for(int i =0; i < index;i++){
+		current = current.getNext();
 	    }
-	    end = end.substring(0,end.length()-1);
-	    end += "]";
-	    return end;
+	    current.setNext(current.getNext().getNext());
+	    return ans;
 	}	
-    }/*
-    public MyLinkedList(){
-	start = new LNode(0,null);
-	size = 0;
-	}*/
-    public int get(int index){
-       	LNode temp = start;
-	int i =0 ;
-	while(i<index){
-	    temp =temp.getNext();
-	    i++;
-	}
-	return temp.getValue();
     }
-    public int set(int index,int value){
-	LNode l = start;
-	int i = 0;
-	while(i<index){
-	    l = l.getNext();
-	    i++;
+    public boolean add(T _value){
+	if(start==null){
+	    start=new LNode(_value);
+	    end=start;
+	}else{
+	    end.setNext(new LNode(_value));
+	    end=end.getNext();
 	}
-	int temp = l.getValue();
-	l.setValue(value);
-	return temp;
-    }
-    public int indexOf(int value){
-	LNode temp = start;
-	int i = 0;
-	while(i<size){
-	    if(temp.getValue()==value){
-		return i;
-	    }
-	    else{
-		temp=temp.getNext();
-	    }
-	    i++;
-	}
-	return -1;
-    }
-    public boolean clear(){
-	start = null;
-	size=0;
+	size+=1;
 	return true;
     }
-    public int remove(int index){
-	int old = get(index);
-	if(index>size){
-	    throw(new IndexOutOfBoundsException("out of bounds"));
-	}
-	else if(index == 0){
-	    start=start.getNext();
-	    
-	}
-	else{
-	    LNode temp = start;
-	    for(int i =0 ; i<index-1;i++){
-		temp=temp.getNext();
-	    }
-	    temp.setNext(temp.getNext().getNext());
-	    size--;
-	}
-	return old;
-    }
-    public boolean add(int index,int value){
+
+    public boolean add(T _value, int index){
 	if(index>size||index<0){
-	    throw(new IndexOutOfBoundsException("out of bounds"));
+	    return false;
 	}
-	if(index == 0){
-	    LNode current = new LNode(value,start);
-	    start = current;
+	LNode temp = new LNode(_value);
+	LNode current = start;
+	if(current==null){
+	    start=temp; end = temp;
 	    size++;
 	    return true;
+	}else if(index == 0){
+	    temp.setNext(current);
+	    start=temp;
+	    size++;
+	    return true;
+	}else if(index == size){
+	    add(_value);
+	    return true;
 	}
-	LNode temp = start;
-	for(int i = 0;i<index-1;i++){
-	    temp=temp.getNext();
+	int i = index;
+	while(i>1){
+	    current=current.getNext();
+	    i--;
 	}
-	LNode temp2 = new LNode(value,temp.getNext());
-	temp.setNext(temp2);
+	temp.setNext(current.getNext());
+	current.setNext(temp);
 	size++;
 	return true;
     }
+    public int indexOf(T _value) {
+	LNode current = start;
+	for(int i = 0;current.getNext()!=null;i++){
+	    if(current.getValue().equals(_value)){
+		return i;
+	    }
+	    current = current.getNext();
+	}
+	return -1;
+    }
+    private class LNode{
+	private T data;
+	private LNode next;
+	public LNode(T v){
+	    data = v;
+	    next = null;
+	}
+	public LNode(T val, LNode nextnode){
+	    next = nextnode;
+	    data = val;
+	}
+	    
+	public T getValue(){
+	    return data;
+	}
+	public LNode getNext(){
+	    return next;
+	}
+	public void setValue(T obj){
+	    data = obj;
+	}
+	public void setNext(LNode nextN){
+	    next = nextN;
+	}
 	
+    }
+
 }

@@ -1,4 +1,3 @@
-import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
     private LNode start, end;
     private int size;
@@ -153,7 +152,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
 	
     }
-    private class iteratedViewer implements Iterator<T>{
+    public class iteratedViewer implements Iterator<T>{
 	private LNode current;
 	public iteratedViewer(){
 	    current = start;
@@ -166,18 +165,6 @@ public class MyLinkedList<T> implements Iterable<T>{
 		throw new NoSuchElementException();
 	    }
 	    T returnValue = current.getValue();
-	    current=current.getNext();
-	    return returnValue;
-	}
-	public void remove(){
-	    throw new UnsupportedOperationException();
-	}
-	
-    }
 
-    public Iterator<T> iterator(){
-	return new iteratedViewer();
-    }
-	   
 
 }

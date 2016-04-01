@@ -60,6 +60,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	else if(index==0){
 	    T ans = start.getValue();
 	    start=start.getNext();
+	    start.setPrev(null);
 	    size-=1;
 	    return ans;
 	}
@@ -76,6 +77,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	size--;
 	return anstwo;
     }
+   
     public boolean add(T _value){
 	if(start==null){
 	    start=new LNode(_value);

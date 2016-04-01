@@ -9,9 +9,9 @@ public class MyStack<T> extends MyLinkedList<T>{
     }
     public T pop(){
 	if(isEmpty()){
-	    throw new NoSuchElementException();
+	    throw new NoSuchElementException("FIX POP FUNCTION");
 	}
-	return data.remove(0);
+	return data.remove(data.size()-1);
     }
     public T peek(){
 	if(isEmpty()){
@@ -24,6 +24,12 @@ public class MyStack<T> extends MyLinkedList<T>{
     }
     public boolean isEmpty(){
 	return(data.size()==0);
+    }
+    //testing the stack
+    public static void main(String[]args){
+	MyStack<String> s1 = new MyStack<String>();
+	//	s1.push("test1");
+	System.out.println(s1.pop());
     }
    
 }

@@ -44,4 +44,10 @@ public class MyQueue<T>{
     public boolean isEmpty(){
 	return (data.size()==0);
     }
+    //testing the queue
+    public static void main(String[]args){
+	MyQueue<String>q1=new MyQueue<String>();
+	q1.enqueue("TEST2FORQ");
+	System.out.println(q1.dequeue());
+    }
 }

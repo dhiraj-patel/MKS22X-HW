@@ -39,7 +39,7 @@ public class MyDeque<T>{
 	deque[start]=value;
 	size++;
     }
-      public void addLast(T value){
+    public void addLast(T value){
 	if(value == null){
 	    throw new NullPointerException();
 	}
@@ -53,7 +53,7 @@ public class MyDeque<T>{
 	deque[end]=value;
 	size++;
     }
-  public T removeFirst(){
+    public T removeFirst(){
 	if(size==0){
 	    throw new NoSuchElementException("size is 0");
 	}
@@ -79,3 +79,16 @@ public class MyDeque<T>{
 	size--;
 	return temp;
     }
+    public T getFirst(){
+	if(size == 0){
+	    throw new NoSuchElementException("size is zero");
+	}
+	return deque[start];
+    }
+    public T getLast(){
+	if(size== 0){
+	    throw new NoSuchElementException("size is zero");
+	}
+	return deque[end];
+    }
+}

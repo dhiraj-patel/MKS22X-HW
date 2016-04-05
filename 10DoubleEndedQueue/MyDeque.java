@@ -39,3 +39,18 @@ public class MyDeque<T>{
 	deque[start]=value;
 	size++;
     }
+      public void addLast(T value){
+	if(value == null){
+	    throw new NullPointerException();
+	}
+	grow();
+	end++;
+	if(end>=deque.length){
+	    if(end!=0){
+		end-=deque.length;
+	    }
+	}
+	deque[end]=value;
+	size++;
+    }
+ 

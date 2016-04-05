@@ -27,3 +27,15 @@ public class MyDeque<T>{
 	    end=size-1;
 	}
     }
+    public void addFirst(T value){
+	if(value == null){
+	    throw new NullPointerException("Value is null");
+	}
+	grow();
+	start--;
+	if(start<0){
+	    start+=deque.length;
+	}
+	deque[start]=value;
+	size++;
+    }

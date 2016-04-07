@@ -91,4 +91,7 @@ public class MyDeque<T>{
 	}
 	return deque[end];
     }
+    public boolean isEmpty(){
+	return size()==0;
+    }
 }

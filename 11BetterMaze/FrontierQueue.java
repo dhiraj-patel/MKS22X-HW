@@ -1,14 +1,12 @@
-import java.util.*;
-public class FrontierQueue<T> implements Frontier<T>{
-    private ArrayDeque<T> frontier;
+public class FrontierQueue<T> extends MyQueue<T> implements Frontier<T>{
     public void add(T element){
-	frontier.add(element);
+	enqueue(element);
     }
     public T next(){
-	return frontier.getFirst();
+	return dequeue();
     }
     public boolean hasNext(){
-	return !frontier.isEmpty();
+	return size()!=0;
     }
 }
 			    

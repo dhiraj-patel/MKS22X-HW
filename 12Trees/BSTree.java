@@ -8,7 +8,6 @@ public class BSTree<T extends Comparable>{
     public int getHeight(){
 	return getHeight(root);
     }
-    
     private int getHeight(TreeNode<T> check) {
 	int heightLeft = 1;
 	if (check.getLeft() != null) {
@@ -25,3 +24,6 @@ public class BSTree<T extends Comparable>{
 	    return heightRight;
 	}
     }
+
+}
+

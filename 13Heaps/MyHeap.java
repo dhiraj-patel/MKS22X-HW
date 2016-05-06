@@ -51,8 +51,19 @@ public class MyHeap<T extends Comparable<T>>{
 
     public T delete(){}
 
-    public void add(T x){}
+    public void add(T x){
+	if(size==data.length){
+	    doubleSize();
+	}
+	data[size+1] = x;
+	size++;
+	int index = size;
 
+	while(index!=1 && x.compareTo(data[index/2])>0){
+	    pushUp(index);
+	    index = index/2;
+	}
+    }
     private void doubleSize(){
 	T[] current = (T[])new Comparable[2*data.length];
 	for(int i = 0;i<data.length;i++){

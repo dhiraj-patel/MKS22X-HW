@@ -5,19 +5,19 @@ public class MyHeap<T extends Comparable<T>>{
     private T[] data;
     private boolean isMax;
     public MyHeap(){
-	size = 1;
-	T[]ary= new Comparable[size];
-	MyHeap(ary);
+	isMax=true;
+	data = (T[]) new Comparable[10];
+	size = 0;
     }
-
-    public MyHeap(T[]x){
-	size = x.length+1;
-	data = new T[size];
-	for(int i = 1; i < size; i++){
-	    data[i]=x[i-1];
+    public MyHeap(T[]array){
+	isMax = true;
+	data = (T[]) new Comparable[10];
+	for(int i = 1; i < size-1; i++){
+	    data[i]=array[i];
 	}
+	size = data.length;
     }
-
+    // i am bigger than children thats all that matters
     private void pushDown(int k){
 	//check maxHeap or minHeap
 	if(data[k].compareTo(data[k*2])>0){
@@ -53,7 +53,13 @@ public class MyHeap<T extends Comparable<T>>{
 
     public void add(T x){}
 
-    private void doubleSize(){}
+    private void doubleSize(){
+	T[] current = (T[])new Comparable[2*data.length];
+	for(int i = 0;i<data.length;i++){
+	    current[i]=data[i];
+	}
+	data = current;
+    }
 
     public String toString(){
 	String s = "[";

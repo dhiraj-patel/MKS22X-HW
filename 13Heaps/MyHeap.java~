@@ -34,7 +34,8 @@ public class MyHeap<T extends Comparable<T>>{
 	}
     }
     private void pushDown(int k){
-	// need to include a different if here m8
+	if((k<size/2)&&
+	   !(compare(data[k],data[2*k])&&(compare(data[k],data[2*k+1])))){
 	    if(compare(data[2*k],data[2*k+1])){
 		swap(2*k,k);
 		pushDown(2*k);

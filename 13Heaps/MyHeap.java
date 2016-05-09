@@ -7,11 +7,6 @@ public class MyHeap<T extends Comparable<T>>{
     public MyHeap(){
 	this(true);
     }
-    public MyHeap(boolean isMax){
-	data = (T[]) new Comparable[10];
-	size=0;
-	this.isMax = isMax;
-    }
     public MyHeap(T[]array){
 	isMax = true;
 	data = (T[]) new Comparable[10];
@@ -19,6 +14,11 @@ public class MyHeap<T extends Comparable<T>>{
 	    data[i]=array[i];
 	}
 	size = data.length;
+    }
+    public MyHeap(boolean isMax){
+	data = (T[]) new Comparable[10];
+	size=0;
+	this.isMax = isMax;
     }
     public MyHeap(T[]array, boolean isMax_){
 	this(isMax_);
@@ -47,11 +47,11 @@ public class MyHeap<T extends Comparable<T>>{
     }
     
     private void swap(int a, int b){
-	T hold = data[a];
+	T temp = data[a];
 	data[a]=data[b];
-	data[b]=hold;
+	data[b]=temp;
     }
-    
+// push up is good
     private void pushUp(int k){
 	if((k>1)&&(compare(data[k],data[k/2]))){
 	    swap(k/2,k);
@@ -67,12 +67,14 @@ public class MyHeap<T extends Comparable<T>>{
 	    pushDown(i);
 	}
     }
-
-    public T delete(){
+    public T remove(){
+	if(size==0){
+	    throw new NoSuchElementException("size is zero");
+	}
 	T ans = data[1];
 	data[1] = data[size];
-	pushDown(1);
 	size-=1;
+	pushDown(1);
 	return ans;
     }
 
@@ -83,7 +85,6 @@ public class MyHeap<T extends Comparable<T>>{
 	data[size+1] = x;
 	size++;
 	int index = size;
-
 	while(index!=1 && x.compareTo(data[index/2])>0){
 	    pushUp(index);
 	    index = index/2;
@@ -102,6 +103,7 @@ public class MyHeap<T extends Comparable<T>>{
 	for(int i = 1; i<size;i++){
 	    retStr+=data[i]+", ";
 	}
+
 	return retStr+data[size]+"]";
 
     }

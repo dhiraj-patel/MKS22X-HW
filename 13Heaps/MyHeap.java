@@ -11,10 +11,10 @@ public class MyHeap<T extends Comparable<T>>{
     }
     public MyHeap(T[]array){
 	isMax = true;
-	size = array.length;
-	data = (T[]) new Comparable[size+1];
-	for(int i = 1; i <=size; i++){
-	    data[i]=array[i-1];
+	size = array.length-1;
+	data = (T[]) new Comparable[10];
+	for(int i = 1; i < data.length; i++){
+	    data[i]=array[i];
 	}
 	heapify();
     }
@@ -26,9 +26,9 @@ public class MyHeap<T extends Comparable<T>>{
     public MyHeap(T[]array, boolean isMax_){
 	isMax = isMax_;
 	size = array.length;
-	data = (T[])new Comparable[array.length+1];
-	for(int i = 1;i<=(size);i++){
-	    data[i]=array[i-1];
+	data = (T[])new Comparable[10];
+	for(int i = 1;i < data.length ;i++){
+	    data[i]=array[i];
 	}
 	heapify();
     }
@@ -89,24 +89,18 @@ public class MyHeap<T extends Comparable<T>>{
 	    i=i/2;
 	}
     }
-    private void pushDown(int pos){
-	if(pos*2+1<=size){
-	    if(compare(data[pos*2],data[pos*2+1])){
-		T temp=data[pos*2];
-		data[pos*2]=data[pos];
-		data[pos]=temp;
-		pushDown(pos*2);
+    private void pushDown(int k){
+	if(k*2+1<=size){
+	    if(compare(data[k*2],data[k*2+1])){
+		swap(k*2,k);
+		pushDown(k*2);
 	    }else{
-		T temp=data[pos*2+1];
-		data[pos*2+1]=data[pos];
-		data[pos]=temp;
-		pushDown(pos*2+1);
+		swap(k*2+1,k);
+		pushDown(k*2+1);
 	    }
 	}else{
-	    if(pos*2<=size){
-		T temp=data[pos*2];
-		data[pos*2]=data[pos];
-		data[pos]=temp;
+	    if(k*2<size){
+		swap(k*2,k);
 	    }
 	}
     }
@@ -119,33 +113,32 @@ public class MyHeap<T extends Comparable<T>>{
 	return data[1];
     }
 
-
-    public String toString(){
-	String temp="";
-	for (int i=1;i<=size;i++){
-	    temp+=data[i]+" ";
+    public String toString() {
+	String ret = "[";
+	for (int i = 1; i < size; i++) {
+	    ret += data[i] + ", ";
 	}
-	return temp;
-	
+	if (size > 0){
+	    ret += data[size];
+	}
+	ret += "]";
+	return ret;
     }
-    public static void main(String[]args) {
-	//MyHeap<Integer> a = new MyHeap<>();
-	MyHeap<Integer> a = new MyHeap<>(false);
-	a.add(56);
-	System.out.println(a);
-	a.add(40);
-	a.add(35);
-	a.add(87);
+
+    public static void main(String[] args) {
+	MyHeap a = new MyHeap<Integer>();
+	//System.out.println(a);
+	a.add(2);
+	a.add(5);
+	a.add(-1);
 	a.add(7);
-	a.add(27);
-	a.add(18);
-	System.out.println(a);
+	a.add(9);
+	//System.out.println(a);
 	a.remove();
-	System.out.println(a);
-	//Integer [] r = {7,18,27,35,40,56,87};
-	Integer [] r= {10,15,9,2000,2,6,7,5000,60,3,15,100,20,3,1};
-	MyHeap<Integer> b = new MyHeap<>(r);
-	System.out.println(b);
+	Integer[] bA = {-1, -2, 4, 11, 7, 0, 3};
+	System.out.println("Start: "+Arrays.toString(bA));
+	MyHeap b = new MyHeap<Integer>(bA);
+	System.out.println("End: "+b);
     }
 	
 }
